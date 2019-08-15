@@ -1,39 +1,42 @@
 package br.com.alicio.projeto.model;
 
 public class Agencia {
-	private int numeroAgencia;
-
-	private String nomeAgencia;
-
-	public int getNumeroAgencia() {
-		return numeroAgencia;
+	private int idAgencia;
+	private int num_agencia;
+	private String nm_agencia;
+	
+	
+	public int getIdAgencia() {
+		return idAgencia;
 	}
-
-	public void setNumeroAgencia(int numeroAgencia) {
-		this.numeroAgencia = numeroAgencia;
+	public void setIdAgencia(int idAgencia) {
+		this.idAgencia = idAgencia;
+	}
+	public int getNum_agencia() {
+		return num_agencia;
+	}
+	public void setNum_agencia(int num_agencia) {
+		this.num_agencia = num_agencia;
+	}
+	public String getNm_agencia() {
+		return nm_agencia;
+	}
+	public void setNm_agencia(String nm_agencia) {
+		this.nm_agencia = nm_agencia;
 	}
 	
-	public String getNomeAgencia() {
-		return nomeAgencia;
+	
+	@Override
+	public String toString() {
+		return "Agencia [idAgencia=" + idAgencia + ", num_agencia=" + num_agencia + ", nm_agencia=" + nm_agencia + "]";
 	}
-
-	public void setNomeAgencia(String nomeAgencia) {
-		this.nomeAgencia = nomeAgencia;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + numeroAgencia;
+		result = prime * result + idAgencia;
 		return result;
 	}
-
-	@Override
-	public String toString() {
-		return "Agencia [numeroAgencia=" + numeroAgencia + ", nomeAgencia=" + nomeAgencia + "]";
-	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -43,16 +46,22 @@ public class Agencia {
 		if (getClass() != obj.getClass())
 			return false;
 		Agencia other = (Agencia) obj;
-		if (nomeAgencia == null) {
-			if (other.nomeAgencia != null)
-				return false;
-		} else if (!nomeAgencia.equals(other.nomeAgencia))
+		if (idAgencia != other.idAgencia)
 			return false;
-		if (numeroAgencia != other.numeroAgencia)
+		if (nm_agencia == null) {
+			if (other.nm_agencia != null)
+				return false;
+		} else if (!nm_agencia.equals(other.nm_agencia))
+			return false;
+		if (num_agencia != other.num_agencia)
 			return false;
 		return true;
 	}
+	
+	
+	
 
+	
 	
 
 	
