@@ -1,4 +1,4 @@
-package br.com.alicio.projeto;
+package br.com.alicio.projeto.controller;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
