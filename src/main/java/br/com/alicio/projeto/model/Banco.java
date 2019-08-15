@@ -1,39 +1,42 @@
 package br.com.alicio.projeto.model;
 
 public class Banco {
-	private int numeroBanco;
-
-	private String nomeBanco;
-
-	public int getNumeroBanco() {
-		return numeroBanco;
+	private int num_banco;
+	private int idBanco;
+	private String nm_banco;
+	
+	
+	public int getNum_banco() {
+		return num_banco;
 	}
-
-	public void setNumeroBanco(int numeroBanco) {
-		this.numeroBanco = numeroBanco;
+	public void setNum_banco(int num_banco) {
+		this.num_banco = num_banco;
 	}
-
-	public String getNomeBanco() {
-		return nomeBanco;
+	public int getIdBanco() {
+		return idBanco;
 	}
-
-	public void setNomeBanco(String nomeBanco) {
-		this.nomeBanco = nomeBanco;
+	public void setIdBanco(int idBanco) {
+		this.idBanco = idBanco;
 	}
-
+	public String getNm_banco() {
+		return nm_banco;
+	}
+	public void setNm_banco(String nm_banco) {
+		this.nm_banco = nm_banco;
+	}
+	
+	
 	@Override
 	public String toString() {
-		return "Banco [numeroBanco=" + numeroBanco + ", nomeBanco=" + nomeBanco + "]";
+		return "Banco [num_banco=" + num_banco + ", idBanco=" + idBanco + ", nm_banco=" + nm_banco + "]";
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + numeroBanco;
+		result = prime * result + idBanco;
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -43,15 +46,26 @@ public class Banco {
 		if (getClass() != obj.getClass())
 			return false;
 		Banco other = (Banco) obj;
-		if (nomeBanco == null) {
-			if (other.nomeBanco != null)
-				return false;
-		} else if (!nomeBanco.equals(other.nomeBanco))
+		if (idBanco != other.idBanco)
 			return false;
-		if (numeroBanco != other.numeroBanco)
+		if (nm_banco == null) {
+			if (other.nm_banco != null)
+				return false;
+		} else if (!nm_banco.equals(other.nm_banco))
+			return false;
+		if (num_banco != other.num_banco)
 			return false;
 		return true;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+
 	
 	
 

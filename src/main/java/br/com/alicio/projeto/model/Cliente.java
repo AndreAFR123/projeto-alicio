@@ -2,39 +2,52 @@ package br.com.alicio.projeto.model;
 
 public class Cliente {
 	
-	private int numeroCliente;
-
-	private String nomeCliente;
-
-	public int getNumeroCliente() {
-		return numeroCliente;
+	private int num_cliente;
+	private int idCliente;
+	private String nm_cliente;
+	private String cpf_cliente;
+	
+	
+	public int getNum_cliente() {
+		return num_cliente;
 	}
-
-	public void setNumeroCliente(int numeroCliente) {
-		this.numeroCliente = numeroCliente;
+	public void setNum_cliente(int num_cliente) {
+		this.num_cliente = num_cliente;
 	}
-
-	public String getNomeCliente() {
-		return nomeCliente;
+	public int getIdCliente() {
+		return idCliente;
 	}
-
-	public void setNomeCliente(String nomeCliente) {
-		this.nomeCliente = nomeCliente;
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
 	}
-
+	public String getNm_cliente() {
+		return nm_cliente;
+	}
+	public void setNm_cliente(String nm_cliente) {
+		this.nm_cliente = nm_cliente;
+	}
+	public String getCpf_cliente() {
+		return cpf_cliente;
+	}
+	public void setCpf_cliente(String cpf_cliente) {
+		this.cpf_cliente = cpf_cliente;
+	}
+	
+	
 	@Override
 	public String toString() {
-		return "Cliente [numeroCliente=" + numeroCliente + ", nomeCliente=" + nomeCliente + "]";
+		return "Cliente [num_cliente=" + num_cliente + ", idCliente=" + idCliente + ", nm_cliente=" + nm_cliente
+				+ ", cpf_cliente=" + cpf_cliente + "]";
 	}
-
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + numeroCliente;
+		result = prime * result + idCliente;
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -44,15 +57,28 @@ public class Cliente {
 		if (getClass() != obj.getClass())
 			return false;
 		Cliente other = (Cliente) obj;
-		if (nomeCliente == null) {
-			if (other.nomeCliente != null)
+		if (cpf_cliente == null) {
+			if (other.cpf_cliente != null)
 				return false;
-		} else if (!nomeCliente.equals(other.nomeCliente))
+		} else if (!cpf_cliente.equals(other.cpf_cliente))
 			return false;
-		if (numeroCliente != other.numeroCliente)
+		if (idCliente != other.idCliente)
+			return false;
+		if (nm_cliente == null) {
+			if (other.nm_cliente != null)
+				return false;
+		} else if (!nm_cliente.equals(other.nm_cliente))
+			return false;
+		if (num_cliente != other.num_cliente)
 			return false;
 		return true;
 	}
+	
+	
+	
+	
+	
 
+	
 	
 }

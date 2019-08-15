@@ -2,16 +2,16 @@ package br.com.alicio.projeto.model;
 
 public class Conta {
 	
-	private int numeroConta;
+	private int idConta;
 	private long saldo;
 	private long limite;
-	private String contaCorrente;
-	private String contaPoupança;
-	public int getNumeroConta() {
-		return numeroConta;
+	private String tp_conta;
+	private int num_conta;
+	public int getIdConta() {
+		return idConta;
 	}
-	public void setNumeroConta(int numeroConta) {
-		this.numeroConta = numeroConta;
+	public void setIdConta(int idConta) {
+		this.idConta = idConta;
 	}
 	public long getSaldo() {
 		return saldo;
@@ -25,29 +25,30 @@ public class Conta {
 	public void setLimite(long limite) {
 		this.limite = limite;
 	}
-	public String getContaCorrente() {
-		return contaCorrente;
+	public String getTp_conta() {
+		return tp_conta;
 	}
-	public void setContaCorrente(String contaCorrente) {
-		this.contaCorrente = contaCorrente;
+	public void setTp_conta(String tp_conta) {
+		this.tp_conta = tp_conta;
 	}
-	public String getContaPoupança() {
-		return contaPoupança;
+	public int getNum_conta() {
+		return num_conta;
 	}
-	public void setContaPoupança(String contaPoupança) {
-		this.contaPoupança = contaPoupança;
+	public void setNum_conta(int num_conta) {
+		this.num_conta = num_conta;
 	}
+	
+	
 	@Override
 	public String toString() {
-		return "Conta [numeroConta=" + numeroConta + ", saldo=" + saldo + ", limite=" + limite + ", contaCorrente="
-				+ contaCorrente + ", contaPoupança=" + contaPoupança + "]";
+		return "Conta [idConta=" + idConta + ", saldo=" + saldo + ", limite=" + limite + ", tp_conta=" + tp_conta
+				+ ", num_conta=" + num_conta + "]";
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + numeroConta;
-		
+		result = prime * result + idConta;
 		return result;
 	}
 	@Override
@@ -59,24 +60,28 @@ public class Conta {
 		if (getClass() != obj.getClass())
 			return false;
 		Conta other = (Conta) obj;
-		if (contaCorrente == null) {
-			if (other.contaCorrente != null)
-				return false;
-		} else if (!contaCorrente.equals(other.contaCorrente))
-			return false;
-		if (contaPoupança == null) {
-			if (other.contaPoupança != null)
-				return false;
-		} else if (!contaPoupança.equals(other.contaPoupança))
+		if (idConta != other.idConta)
 			return false;
 		if (limite != other.limite)
 			return false;
-		if (numeroConta != other.numeroConta)
+		if (num_conta != other.num_conta)
 			return false;
 		if (saldo != other.saldo)
 			return false;
+		if (tp_conta == null) {
+			if (other.tp_conta != null)
+				return false;
+		} else if (!tp_conta.equals(other.tp_conta))
+			return false;
 		return true;
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 
