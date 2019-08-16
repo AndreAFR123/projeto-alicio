@@ -93,7 +93,7 @@ public class AgenciaDAO {
 	}
 
 	public List<Agencia> listar() throws SQLException, ClassNotFoundException {
-		String sqlQuery = "SELECT * FROM chamado ORDER BY id";
+		String sqlQuery = "SELECT * FROM agencia ORDER BY idAgencia";
 
 		try {
 			PreparedStatement stmt = this.conexao.getConnection().prepareStatement(sqlQuery);

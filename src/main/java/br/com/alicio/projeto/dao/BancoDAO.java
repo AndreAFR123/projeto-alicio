@@ -8,7 +8,7 @@ import java.util.List;
 
 import br.com.alicio.projeto.data.ConexaoJDBC;
 import br.com.alicio.projeto.data.ConexaoMysqlJDBC;
-import br.com.alicio.projeto.model.Agencia;
+import br.com.alicio.projeto.model.Banco;
 
 public class BancoDAO {
 
@@ -18,14 +18,14 @@ public class BancoDAO {
 		this.conexao = new ConexaoMysqlJDBC();
 	}
 
-	public Long inserir(Agencia agencia) throws SQLException, ClassNotFoundException {
+	public Long inserir(Banco banco) throws SQLException, ClassNotFoundException {
 		Long id = null;
 		String sqlQuery = "INSERT INTO banco (nm_banco, num_banco) VALUES (?, ?) ";
 
 		try {
 			PreparedStatement stmt = this.conexao.getConnection().prepareStatement(sqlQuery);
-			stmt.setString(1, agencia.getNm_agencia());
-			stmt.setInt(2, agencia.getNum_agencia());
+			stmt.setString(1, banco.getNm_banco());
+			stmt.setInt(2, banco.getNum_banco());
 			stmt.execute();
 
 			this.conexao.commit();
@@ -37,15 +37,15 @@ public class BancoDAO {
 		return id;
 	}
 
-	public int alterar(Agencia agencia) throws SQLException, ClassNotFoundException {
-		String sqlQuery = "UPDATE agencia SET num_agencia = ?, nm_agencia = ? WHERE idAgencia = ?";
+	public int alterar(Banco banco) throws SQLException, ClassNotFoundException {
+		String sqlQuery = "UPDATE banco SET num_banco = ?, nm_banco = ? WHERE idBanco = ?";
 		int linhasAfetadas = 0;
 
 		try {
 			PreparedStatement stmt = this.conexao.getConnection().prepareStatement(sqlQuery);
-			stmt.setInt(1, agencia.getNum_agencia());
-			stmt.setString(3, agencia.getNm_agencia());
-			stmt.setLong(3, agencia.getIdAgencia());
+			stmt.setInt(1, banco.getNum_banco());
+			stmt.setString(2, banco.getNm_banco());
+			stmt.setInt(3, banco.getIdBanco());
 
 			linhasAfetadas = stmt.executeUpdate();
 			this.conexao.commit();
@@ -57,13 +57,13 @@ public class BancoDAO {
 		return linhasAfetadas;
 	}
 
-	public int excluir(int idAgencia) throws SQLException, ClassNotFoundException {
+	public int excluir(int idBanco) throws SQLException, ClassNotFoundException {
 		int linhasAlfetadas = 0;
-		String sqlQuery = "DELETE FROM agencia WHERE idAgencia = ?";
+		String sqlQuery = "DELETE FROM banco WHERE idBanco = ?";
 
 		try {
 			PreparedStatement stmt = this.conexao.getConnection().prepareStatement(sqlQuery);
-			stmt.setInt(1, idAgencia);
+			stmt.setInt(1, idBanco);
 			linhasAlfetadas = stmt.executeUpdate();
 			this.conexao.commit();
 		} catch (SQLException e) {
@@ -74,12 +74,12 @@ public class BancoDAO {
 		return linhasAlfetadas;
 	}
 
-	public Agencia selecionar(int idAgencia) throws SQLException, ClassNotFoundException {
-		String sqlQuery = "SELECT * FROM agencia WHERE idAgencia= ?";
+	public Banco selecionar(int idBanco) throws SQLException, ClassNotFoundException {
+		String sqlQuery = "SELECT * FROM banco WHERE idBanco= ?";
 
 		try {
 			PreparedStatement stmt = this.conexao.getConnection().prepareStatement(sqlQuery);
-			stmt.setInt(1, idAgencia);
+			stmt.setInt(1, idBanco);
 			ResultSet rs = stmt.executeQuery();
 
 			if (rs.next()) {
@@ -92,14 +92,14 @@ public class BancoDAO {
 		return null;
 	}
 
-	public List<Agencia> listar() throws SQLException, ClassNotFoundException {
-		String sqlQuery = "SELECT * FROM chamado ORDER BY id";
+	public List<Banco> listar() throws SQLException, ClassNotFoundException {
+		String sqlQuery = "SELECT * FROM banco ORDER BY idBanco";
 
 		try {
 			PreparedStatement stmt = this.conexao.getConnection().prepareStatement(sqlQuery);
 			ResultSet rs = stmt.executeQuery();
 
-			List<Agencia> chamados = new ArrayList<>();
+			List<Banco> chamados = new ArrayList<>();
 
 			while (rs.next()) {
 				chamados.add(parser(rs));
@@ -111,13 +111,13 @@ public class BancoDAO {
 		}
 	}
 
-	private Agencia parser(ResultSet resultSet) throws SQLException {
-		Agencia a = new Agencia();
+	private Banco parser(ResultSet resultSet) throws SQLException {
+		Banco b = new Banco();
 
-		a.setIdAgencia(resultSet.getInt("idAgencia"));
-		a.setNm_agencia(resultSet.getString("nm_agencia"));
-		a.setNum_agencia(resultSet.getInt("num_agencia"));
+		b.setIdBanco(resultSet.getInt("idBanco"));
+		b.setNm_banco(resultSet.getString("nm_banco"));
+		b.setNum_banco(resultSet.getInt("num_banco"));
 
-		return a;
+		return b;
 	}
 }
