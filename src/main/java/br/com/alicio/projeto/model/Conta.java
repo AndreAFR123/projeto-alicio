@@ -7,6 +7,7 @@ public class Conta {
 	private long limite;
 	private String tp_conta;
 	private int num_conta;
+	
 	public int getIdConta() {
 		return idConta;
 	}
@@ -37,7 +38,6 @@ public class Conta {
 	public void setNum_conta(int num_conta) {
 		this.num_conta = num_conta;
 	}
-	
 	
 	@Override
 	public String toString() {
@@ -75,14 +75,4 @@ public class Conta {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }

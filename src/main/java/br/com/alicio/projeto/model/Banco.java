@@ -5,7 +5,6 @@ public class Banco {
 	private int idBanco;
 	private String nm_banco;
 	
-	
 	public int getNum_banco() {
 		return num_banco;
 	}
@@ -24,7 +23,6 @@ public class Banco {
 	public void setNm_banco(String nm_banco) {
 		this.nm_banco = nm_banco;
 	}
-	
 	
 	@Override
 	public String toString() {
@@ -57,16 +55,4 @@ public class Banco {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-
-	
-	
-
 }

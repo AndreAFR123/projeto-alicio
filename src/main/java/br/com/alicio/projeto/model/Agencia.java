@@ -25,7 +25,6 @@ public class Agencia {
 		this.nm_agencia = nm_agencia;
 	}
 	
-	
 	@Override
 	public String toString() {
 		return "Agencia [idAgencia=" + idAgencia + ", num_agencia=" + num_agencia + ", nm_agencia=" + nm_agencia + "]";
@@ -56,14 +55,5 @@ public class Agencia {
 		if (num_agencia != other.num_agencia)
 			return false;
 		return true;
-	}
-	
-	
-	
-
-	
-	
-
-	
-	
+	}	
 }

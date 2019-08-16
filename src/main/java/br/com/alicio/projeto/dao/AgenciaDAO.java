@@ -1,132 +1,123 @@
 package br.com.alicio.projeto.dao;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import br.com.alicio.projeto.data.ConexaoJDBC;
+import br.com.alicio.projeto.data.ConexaoMysqlJDBC;
+import br.com.alicio.projeto.model.Agencia;
+
 public class AgenciaDAO {
-	package br.com.proway.api.dao;
 
-	import java.sql.PreparedStatement;
-	import java.sql.ResultSet;
-	import java.sql.SQLException;
-	import java.util.ArrayList;
-	import java.util.List;
+	private final ConexaoJDBC conexao;
 
-	import br.com.proway.api.data.ConexaoJDBC;
-	import br.com.proway.api.data.ConexaoMysqlJDBC;
-	import br.com.proway.api.model.Chamado;
-	import br.com.proway.api.model.util.Status;
+	public AgenciaDAO() throws SQLException, ClassNotFoundException {
+		this.conexao = new ConexaoMysqlJDBC();
+	}
 
+	public Long inserir(Agencia agencia) throws SQLException, ClassNotFoundException {
+		Long id = null;
+		String sqlQuery = "INSERT INTO agencia (nm_agencia, num_agencia) VALUES (?, ?) ";
 
-	public class ChamadoDAO {
+		try {
+			PreparedStatement stmt = this.conexao.getConnection().prepareStatement(sqlQuery);
+			stmt.setString(1, agencia.getNm_agencia());
+			stmt.setInt(2, agencia.getNum_agencia());
+			stmt.execute();
 
-		private final ConexaoJDBC conexao;
-
-		public ChamadoDAO() throws SQLException, ClassNotFoundException {
-			this.conexao = new ConexaoMysqlJDBC();
+			this.conexao.commit();
+		} catch (SQLException e) {
+			this.conexao.rollback();
+			throw e;
 		}
 
-		public Long inserir(Chamado chamado) throws SQLException, ClassNotFoundException {
-			Long id = null;
-			String sqlQuery = "INSERT INTO chamado (assunto, status, mensagem) VALUES (?, ?, ?) ";
+		return id;
+	}
 
-			try {
-				PreparedStatement stmt = this.conexao.getConnection().prepareStatement(sqlQuery);
-				stmt.setString(1, chamado.getAssunto());
-				stmt.setString(2, chamado.getStatus().toString());
-				stmt.setString(3, chamado.getMensagem());
-				stmt.execute();
-				
-				this.conexao.commit();
-			} catch (SQLException e) {
-				this.conexao.rollback();
-				throw e;
+	public int alterar(Agencia agencia) throws SQLException, ClassNotFoundException {
+		String sqlQuery = "UPDATE agencia SET num_agencia = ?, nm_agencia = ? WHERE idAgencia = ?";
+		int linhasAfetadas = 0;
+
+		try {
+			PreparedStatement stmt = this.conexao.getConnection().prepareStatement(sqlQuery);
+			stmt.setInt(1, agencia.getNum_agencia());
+			stmt.setString(2, agencia.getNm_agencia());
+			stmt.setLong(3, agencia.getIdAgencia());
+
+			linhasAfetadas = stmt.executeUpdate();
+			this.conexao.commit();
+		} catch (SQLException e) {
+			this.conexao.rollback();
+			throw e;
+		}
+
+		return linhasAfetadas;
+	}
+
+	public int excluir(int idAgencia) throws SQLException, ClassNotFoundException {
+		int linhasAlfetadas = 0;
+		String sqlQuery = "DELETE FROM agencia WHERE idAgencia = ?";
+
+		try {
+			PreparedStatement stmt = this.conexao.getConnection().prepareStatement(sqlQuery);
+			stmt.setInt(1, idAgencia);
+			linhasAlfetadas = stmt.executeUpdate();
+			this.conexao.commit();
+		} catch (SQLException e) {
+			this.conexao.rollback();
+			throw e;
+		}
+
+		return linhasAlfetadas;
+	}
+
+	public Agencia selecionar(int idAgencia) throws SQLException, ClassNotFoundException {
+		String sqlQuery = "SELECT * FROM agencia WHERE idAgencia= ?";
+
+		try {
+			PreparedStatement stmt = this.conexao.getConnection().prepareStatement(sqlQuery);
+			stmt.setInt(1, idAgencia);
+			ResultSet rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				return parser(rs);
+			}
+		} catch (SQLException e) {
+			throw e;
+		}
+
+		return null;
+	}
+
+	public List<Agencia> listar() throws SQLException, ClassNotFoundException {
+		String sqlQuery = "SELECT * FROM chamado ORDER BY id";
+
+		try {
+			PreparedStatement stmt = this.conexao.getConnection().prepareStatement(sqlQuery);
+			ResultSet rs = stmt.executeQuery();
+
+			List<Agencia> chamados = new ArrayList<>();
+
+			while (rs.next()) {
+				chamados.add(parser(rs));
 			}
 
-			return id;
+			return chamados;
+		} catch (SQLException e) {
+			throw e;
 		}
+	}
 
-		public int alterar(Chamado chamado) throws SQLException, ClassNotFoundException {
-			String sqlQuery = "UPDATE chamado SET assunto = ?, status = ?, mensagem = ? WHERE id = ?";
-			int linhasAfetadas = 0;
+	private Agencia parser(ResultSet resultSet) throws SQLException {
+		Agencia a = new Agencia();
 
-			try {
-				PreparedStatement stmt = this.conexao.getConnection().prepareStatement(sqlQuery);
-				stmt.setString(1, chamado.getAssunto());
-				stmt.setString(2, chamado.getStatus().toString());
-				stmt.setString(3, chamado.getMensagem());
-				stmt.setLong(4, chamado.getId());
+		a.setIdAgencia(resultSet.getInt("idAgencia"));
+		a.setNm_agencia(resultSet.getString("nm_agencia"));
+		a.setNum_agencia(resultSet.getInt("num_agencia"));
 
-				linhasAfetadas = stmt.executeUpdate();
-				this.conexao.commit();
-			} catch (SQLException e) {
-				this.conexao.rollback();
-				throw e;
-			}
-
-			return linhasAfetadas;
-		}
-
-		public int excluir(long id) throws SQLException, ClassNotFoundException {
-			int linhasAlfetadas = 0;
-			String sqlQuery = "DELETE FROM chamado WHERE id = ?";
-
-			try {
-				PreparedStatement stmt = this.conexao.getConnection().prepareStatement(sqlQuery);
-				stmt.setLong(1, id);
-				linhasAlfetadas = stmt.executeUpdate();
-				this.conexao.commit();
-			} catch (SQLException e) {
-				this.conexao.rollback();
-				throw e;
-			}
-
-			return linhasAlfetadas;
-		}
-
-		public Chamado selecionar(long id) throws SQLException, ClassNotFoundException {
-			String sqlQuery = "SELECT * FROM chamado WHERE id = ?";
-
-			try {
-				PreparedStatement stmt = this.conexao.getConnection().prepareStatement(sqlQuery);
-				stmt.setLong(1, id);
-				ResultSet rs = stmt.executeQuery();
-
-				if (rs.next()) {
-					return parser(rs);
-				}
-			} catch (SQLException e) {
-				throw e;
-			}
-
-			return null;
-		}
-
-		public List<Chamado> listar() throws SQLException, ClassNotFoundException {
-			String sqlQuery = "SELECT * FROM chamado ORDER BY id";
-
-			try {
-				PreparedStatement stmt = this.conexao.getConnection().prepareStatement(sqlQuery);
-				ResultSet rs = stmt.executeQuery();
-
-				List<Chamado> chamados = new ArrayList<>();
-
-				while (rs.next()) {
-					chamados.add(parser(rs));
-				}
-
-				return chamados;
-			} catch (SQLException e) {
-				throw e;
-			}
-		}
-
-		private Chamado parser(ResultSet resultSet) throws SQLException {
-			Chamado c = new Chamado();
-
-			c.setId(resultSet.getLong("id"));
-			c.setAssunto(resultSet.getString("assunto"));
-			c.setMensagem(resultSet.getString("mensagem"));
-			c.setStatus(Status.valueOf(resultSet.getString("status")));
-
-			return c;
-		}
+		return a;
 	}
 }

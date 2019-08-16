@@ -7,7 +7,6 @@ public class Cliente {
 	private String nm_cliente;
 	private String cpf_cliente;
 	
-	
 	public int getNum_cliente() {
 		return num_cliente;
 	}
@@ -33,14 +32,12 @@ public class Cliente {
 		this.cpf_cliente = cpf_cliente;
 	}
 	
-	
 	@Override
 	public String toString() {
 		return "Cliente [num_cliente=" + num_cliente + ", idCliente=" + idCliente + ", nm_cliente=" + nm_cliente
 				+ ", cpf_cliente=" + cpf_cliente + "]";
 	}
-	
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -73,12 +70,4 @@ public class Cliente {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
-
-	
-	
 }
