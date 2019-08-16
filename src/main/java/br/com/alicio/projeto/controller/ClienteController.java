@@ -41,7 +41,7 @@ import br.com.alicio.projeto.model.Cliente;
 		@GET
 		@Produces(MediaType.APPLICATION_JSON)
 		@Path("{id}/")
-		public Cliente getCliente(@PathParam("id") long id) {
+		public Cliente getCliente(@PathParam("id") int id) {
 			try {
 				ClienteDAO ClienteDAO = new ClienteDAO();
 				return ClienteDAO.selecionar(id);
@@ -101,7 +101,7 @@ import br.com.alicio.projeto.model.Cliente;
 				ClienteDAO ClienteDAO = new ClienteDAO();
 
 				Cliente c = ClienteDAO.selecionar(id);
-				c.setStatus(Status.FECHADO);
+				
 
 				ClienteDAO.alterar(c);
 				return Response.status(Response.Status.ACCEPTED).build();
@@ -112,4 +112,4 @@ import br.com.alicio.projeto.model.Cliente;
 		}
 	}
 
-}
+

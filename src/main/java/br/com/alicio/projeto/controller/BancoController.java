@@ -15,7 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
+
 
 import br.com.alicio.projeto.dao.BancoDAO;
 import br.com.alicio.projeto.model.Banco;
@@ -83,7 +83,7 @@ import br.com.alicio.projeto.model.Banco;
 
 		@DELETE
 		@Path("{id}/")
-		public Response delete(@PathParam("id") long id) {
+		public Response delete(@PathParam("id") int id) {
 			try {
 				BancoDAO BancoDAO = new BancoDAO();
 				BancoDAO.excluir(id);
@@ -94,22 +94,7 @@ import br.com.alicio.projeto.model.Banco;
 			}
 		}
 
-	/*	@PUT
-		@Path("{id}/")
-		public Response concluir(@PathParam("id") int id) {
-			try {
-				BancoDAO BancooDAO = new BancoDAO();
-
-				Banco c = BancoDAO.selecionar(id);
-				c.setStatus(Status.FECHADO);
-
-				BancoDAO.alterar(c);
-				return Response.status(Response.Status.ACCEPTED).build();
-			} catch (Exception ex) {
-				Logger.getLogger(BancoController.class.getName()).log(Level.SEVERE, null, ex);
-				throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
-			}*/
-		}
+	
 	}
 
-}
+
