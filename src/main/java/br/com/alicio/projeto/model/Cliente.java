@@ -6,7 +6,15 @@ public class Cliente {
 	private int idCliente;
 	private String nm_cliente;
 	private String cpf_cliente;
+	private int fk_cliente_conta;
 	
+	
+	public int getFk_cliente_conta() {
+		return fk_cliente_conta;
+	}
+	public void setFk_cliente_conta(int fk_cliente_conta) {
+		this.fk_cliente_conta = fk_cliente_conta;
+	}
 	public int getNum_cliente() {
 		return num_cliente;
 	}
@@ -35,7 +43,7 @@ public class Cliente {
 	@Override
 	public String toString() {
 		return "Cliente [num_cliente=" + num_cliente + ", idCliente=" + idCliente + ", nm_cliente=" + nm_cliente
-				+ ", cpf_cliente=" + cpf_cliente + "]";
+				+ ", cpf_cliente=" + cpf_cliente + ", fk_cliente_conta=" + fk_cliente_conta + "]";
 	}
 
 	@Override
@@ -58,6 +66,8 @@ public class Cliente {
 			if (other.cpf_cliente != null)
 				return false;
 		} else if (!cpf_cliente.equals(other.cpf_cliente))
+			return false;
+		if (fk_cliente_conta != other.fk_cliente_conta)
 			return false;
 		if (idCliente != other.idCliente)
 			return false;
