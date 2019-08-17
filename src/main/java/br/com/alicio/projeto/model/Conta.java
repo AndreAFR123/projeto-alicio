@@ -8,6 +8,8 @@ public class Conta {
 	private String tp_conta;
 	private int num_conta;
 	
+
+	
 	public int getIdConta() {
 		return idConta;
 	}
