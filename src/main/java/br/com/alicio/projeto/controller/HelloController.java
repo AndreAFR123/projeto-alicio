@@ -10,7 +10,7 @@ import javax.ws.rs.core.MediaType;
 @Path("hello")
 public class HelloController {
   @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     public String getMensagem(@QueryParam("usuario") String usuario) {
         return "Bem vindo: " + usuario;
     }

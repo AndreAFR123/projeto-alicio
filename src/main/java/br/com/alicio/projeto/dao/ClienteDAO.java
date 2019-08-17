@@ -21,13 +21,14 @@ public class ClienteDAO {
 
 	public Long inserir(Cliente cliente) throws SQLException, ClassNotFoundException {
 		Long id = null;
-		String sqlQuery = "INSERT INTO cliente (nm_cliente, num_cliente, cpf_cliente) VALUES (?, ?, ?) ";
+		String sqlQuery = "INSERT INTO cliente (nm_cliente, num_cliente, cpf_cliente, fk_cliente_conta) VALUES (?, ?, ?, ?) ";
 
 		try {
 			PreparedStatement stmt = this.conexao.getConnection().prepareStatement(sqlQuery);
 			stmt.setString(1, cliente.getNm_cliente());
 			stmt.setInt(2, cliente.getNum_cliente());
 			stmt.setString(3, cliente.getCpf_cliente());
+			stmt.setInt(4, cliente.getFk_cliente_conta());
 			stmt.execute();
 
 			this.conexao.commit();
@@ -119,6 +120,7 @@ public class ClienteDAO {
 		c.setIdCliente(resultSet.getInt("idCliente"));
 		c.setNm_cliente(resultSet.getString("nm_cliente"));
 		c.setNum_cliente(resultSet.getInt("num_cliente"));
+		c.setFk_cliente_conta(resultSet.getInt("fk_cliente_conta"));
 
 		return c;
 	}

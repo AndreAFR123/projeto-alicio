@@ -5,6 +5,22 @@ public class Banco {
 	private int idBanco;
 	private String nm_banco;
 	
+	private int fk_banco_agencia;
+	private int fk_banco_cliente;
+	
+	
+	public int getFk_banco_agencia() {
+		return fk_banco_agencia;
+	}
+	public void setFk_banco_agencia(int fk_banco_agencia) {
+		this.fk_banco_agencia = fk_banco_agencia;
+	}
+	public int getFk_banco_cliente() {
+		return fk_banco_cliente;
+	}
+	public void setFk_banco_cliente(int fk_banco_cliente) {
+		this.fk_banco_cliente = fk_banco_cliente;
+	}
 	public int getNum_banco() {
 		return num_banco;
 	}
@@ -26,7 +42,8 @@ public class Banco {
 	
 	@Override
 	public String toString() {
-		return "Banco [num_banco=" + num_banco + ", idBanco=" + idBanco + ", nm_banco=" + nm_banco + "]";
+		return "Banco [num_banco=" + num_banco + ", idBanco=" + idBanco + ", nm_banco=" + nm_banco
+				+ ", fk_banco_agencia=" + fk_banco_agencia + ", fk_banco_cliente=" + fk_banco_cliente + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -44,6 +61,10 @@ public class Banco {
 		if (getClass() != obj.getClass())
 			return false;
 		Banco other = (Banco) obj;
+		if (fk_banco_agencia != other.fk_banco_agencia)
+			return false;
+		if (fk_banco_cliente != other.fk_banco_cliente)
+			return false;
 		if (idBanco != other.idBanco)
 			return false;
 		if (nm_banco == null) {

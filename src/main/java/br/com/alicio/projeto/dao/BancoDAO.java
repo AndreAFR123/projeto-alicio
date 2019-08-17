@@ -19,23 +19,22 @@ public class BancoDAO {
 	}
 
 	public Long inserir(Banco banco) throws SQLException, ClassNotFoundException {
-		Long id = null;
-		String sqlQuery = "INSERT INTO banco (nm_banco, num_banco) VALUES (?, ?) ";
-
-		try {
-			PreparedStatement stmt = this.conexao.getConnection().prepareStatement(sqlQuery);
-			stmt.setString(1, banco.getNm_banco());
-			stmt.setInt(2, banco.getNum_banco());
-			stmt.execute();
-
-			this.conexao.commit();
-		} catch (SQLException e) {
-			this.conexao.rollback();
-			throw e;
-		}
-
-		return id;
-	}
+        Long id = null;
+        String sqlQuery = "INSERT INTO banco (nm_banco, num_banco, fk_banco_agencia, fk_banco_cliente) VALUES (?, ?, ?, ?) ";
+        try {
+            PreparedStatement stmt = this.conexao.getConnection().prepareStatement(sqlQuery);
+            stmt.setString(1, banco.getNm_banco());
+            stmt.setInt(2, banco.getNum_banco());
+            stmt.setInt(3, banco.getFk_banco_agencia());
+            stmt.setInt(4,banco.getFk_banco_agencia());
+            stmt.execute();
+            this.conexao.commit();
+        } catch (SQLException e) {
+            this.conexao.rollback();
+            throw e;
+        }
+        return id;
+    }
 
 	public int alterar(Banco banco) throws SQLException, ClassNotFoundException {
 		String sqlQuery = "UPDATE banco SET num_banco = ?, nm_banco = ? WHERE idBanco = ?";
@@ -117,6 +116,8 @@ public class BancoDAO {
 		b.setIdBanco(resultSet.getInt("idBanco"));
 		b.setNm_banco(resultSet.getString("nm_banco"));
 		b.setNum_banco(resultSet.getInt("num_banco"));
+		b.setFk_banco_agencia(resultSet.getInt("fk_banco_agencia"));
+		b.setFk_banco_cliente(resultSet.getInt("fk_banco_cliente"));
 
 		return b;
 	}
