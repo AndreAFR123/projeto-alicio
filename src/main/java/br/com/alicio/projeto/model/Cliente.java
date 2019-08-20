@@ -8,12 +8,6 @@ public class Cliente {
 	private String cpf_cliente;
 	private int fk_cliente_conta;
 	
-<<<<<<< HEAD
-	private int fk_cliente_conta;
-	
-=======
->>>>>>> 34b03a1b64fa3f627ebc751bb8b8c9716b35efc5
-	
 	public int getFk_cliente_conta() {
 		return fk_cliente_conta;
 	}
